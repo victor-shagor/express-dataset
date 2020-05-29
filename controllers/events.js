@@ -6,7 +6,7 @@ const getAllEvents = () => {
       `SELECT DISTINCT *
     FROM ((events
     INNER JOIN actors ON events.actor_id = actors.actor_id)
-    INNER JOIN repo ON events.repo_id = repo.repo_id);`,
+    INNER JOIN repo ON events.repo_id = repo.repo_id); ORDER by events.id ASC`,
       function (err, row) {
         if (err) {
           reject(err);
@@ -80,7 +80,7 @@ var getByActor = (id) => {
       `SELECT DISTINCT *
       FROM ((events
       INNER JOIN actors ON events.actor_id = actors.actor_id)
-      INNER JOIN repo ON events.repo_id = repo.repo_id) WHERE events.actor_id = $1`,
+      INNER JOIN repo ON events.repo_id = repo.repo_id) WHERE events.actor_id = $1 ORDER by events.id ASC`,
       [id],
       (err, row) => {
         if (err) {
